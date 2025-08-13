@@ -11,7 +11,7 @@ class RAG:
     def __init__(self,model):
         self.writer = model.with_structured_output(EmailResponse)
         embedder = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
-        _client = weaviate.connect_to_local()
+        self._client = weaviate.connect_to_local()
         # for fist time creation use:
         """
         vectorstore = WeaviateVectorStore.from_documents(
@@ -24,7 +24,7 @@ class RAG:
         )
         """
         self.vectorstore = WeaviateVectorStore(
-            client=_client,
+            client=self._client,
             index_name='EmailTemplates',
             text_key='content',
             embedding=embedder
@@ -69,6 +69,7 @@ class RAG:
         
         llm_final_output = self.writer.invoke(messages)
         self.updatedb(llm_final_output)
+        self._client.close()
         return llm_final_output
 
     def updatedb(self,llm_output):
