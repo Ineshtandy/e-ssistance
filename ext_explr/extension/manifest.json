@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Email Generator",
+  "version": "1.0",
+  "action": {},
+  "permissions": ["scripting", "activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "inject/index.html",
+        "inject/style.css"
+      ],
+      "matches":["<all_urls>"]
+    }
+  ]
+}

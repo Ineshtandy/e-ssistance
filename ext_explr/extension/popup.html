@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RAG Email Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      width: 400px;
+      height: 600px;  
+      margin: 0;
+      padding: 1rem;
+      background-color: #ffffff;
+      overflow: hidden; /* prevent scrollbars */
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+    <div class="popup-header">
+        <h3>Generate a Professional Email</h3>
+        <!-- <button class="close-button" onclick="window.close()">BYE BYE</button> -->
+    </div>
+    <form method="POST" id="email-form">
+        <label>Email Content (Optional):</label><br>
+        <input type="text" name="email_content" value=""><br><br>
+
+        <label>User Query:</label><br>
+        <input type="text" name="user_query" value="write an email to thank my manager"><br><br>
+
+        <label>Purpose:</label><br>
+        <input type="text" name="purpose" value="writing"><br><br>
+
+        <label>Intent:</label><br>
+        <input type="text" name="intent" value="thanking"><br><br>
+
+        <label>Style:</label><br>
+        <input type="text" name="style" value="professional"><br><br>
+
+        <input type="submit" value="Generate Email">
+    </form>
+
+    <!-- {% if subject %}
+        <hr>
+        <h3>Generated Email</h3>
+        <h3>Subject: <strong>{{subject}}</strong></h3><br><br>
+        <h3>Body:</h3>
+        <pre>{{ body }}</pre>
+    {% endif %} -->
+    <div id="output"> 
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>
