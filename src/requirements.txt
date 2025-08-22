@@ -1,0 +1,11 @@
+weaviate-client
+langchain
+langchain-community
+sentence-transformers
+langchain-huggingface
+langchain_weaviate
+numpy
+pydantic
+dotenv
+langchain_google_genai
+pathlib

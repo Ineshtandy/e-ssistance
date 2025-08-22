@@ -1,4 +1,5 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
+import os
 from src.rewriter import Rewriter
 from src.rag import RAG
 from src.config import GEMINI_MODEL
@@ -7,6 +8,7 @@ from src.config import GEMINI_MODEL
 def generate_email(email_content,user_query,purpose,intent,style):
     llm = ChatGoogleGenerativeAI(
         model=GEMINI_MODEL,
+        google_api_key=os.environ["GOOGLE_API_KEY"],
         temperature=0,
         max_tokens=None,
         timeout=None,

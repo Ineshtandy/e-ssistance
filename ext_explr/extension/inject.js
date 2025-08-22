@@ -89,6 +89,9 @@ async function loadEmailGenerator() {
   style.href = chrome.runtime.getURL("inject/style.css");
   document.head.appendChild(style);
 
+  // Backend URL (match the port in `docker compose ps`)
+  const BACKEND_URL = "http://127.0.0.1:5050";
+
   // Wire button event
   document.getElementById("email-form").addEventListener("submit", async (e) => {
     e.preventDefault()
@@ -99,7 +102,7 @@ async function loadEmailGenerator() {
     const intent = e.target.intent.value;
     const style = e.target.style.value;
 
-    const res = await fetch("http://127.0.0.1:5000/", {
+    const res = await fetch(`${BACKEND_URL}/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email_content, query, purpose, intent, style })

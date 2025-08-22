@@ -9,6 +9,10 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../s
 app = Flask(__name__)
 CORS(app)
 
+@app.get("/health")
+def health():
+    return {"ok":True}
+
 # @app.route("/generate", methods=["GET", "POST"])
 # def index():
 #     subject = "sample subject"
@@ -53,4 +57,4 @@ def index():
         return "Expected JSON", 400
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
