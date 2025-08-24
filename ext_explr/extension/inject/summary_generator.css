@@ -1,0 +1,212 @@
+/* Root panel — same look as your other UIs, scoped to #summary-generator */
+#summary-generator {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 2147483647; /* on top */
+  width: 360px;
+  max-width: 92vw;
+
+  background: #f2f2f2;  /* light gray */
+  color: #111;          /* dark text */
+  font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Arial, sans-serif;
+  border: 1px solid #d9d9d9;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+  padding: 16px 16px 14px;
+  box-sizing: border-box;
+}
+
+/* Heading centered at the top */
+#summary-generator h3 {
+  margin: 0;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: #111;
+}
+
+/* Close button in the top-right corner */
+#summary-generator #close-button {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  color: #111;
+  padding: 6px;
+  border-radius: 8px;
+}
+#summary-generator #close-button:hover,
+#summary-generator #close-button:focus {
+  background: rgba(0,0,0,0.06);
+  outline: none;
+}
+
+#summary-generator #back-button {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  color: #111;
+  padding: 6px;
+  border-radius: 8px;
+}
+#summary-generator #back-button:hover,
+#summary-generator #back-button:focus {
+  background: rgba(0,0,0,0.06);
+  outline: none;
+}
+
+/* Form layout */
+#summary-generator form {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+/* Range selector (radios) */
+#summary-generator .range-mode {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 8px;
+  align-items: center;
+}
+#summary-generator .radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid #cfcfcf;
+  background: #fff;
+  color: #111;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+}
+#summary-generator .radio input[type="radio"] {
+  accent-color: #111; /* modern browsers */
+}
+
+/* Date range fields */
+#summary-generator .date-range {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+#summary-generator .date-range[aria-hidden="true"] {
+  opacity: 0.6;
+  filter: grayscale(0.1);
+}
+
+/* Labels & inputs */
+#summary-generator label {
+  font-size: 12px;
+  color: #111;
+  margin-bottom: 4px;
+}
+
+#summary-generator input[type="date"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  background: #fff;
+  color: #111;
+  outline: none;
+  box-sizing: border-box;
+}
+#summary-generator input[type="date"]:focus {
+  border-color: #7a7a7a;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
+}
+#summary-generator input[type="date"]:disabled {
+  background: #f7f7f7;
+  color: #777;
+  cursor: not-allowed;
+}
+
+/* Submit button */
+#summary-generator input[type="submit"].primary {
+  margin-top: 4px;
+  padding: 10px 12px;
+  border: 1px solid #111;
+  background: #111;
+  color: #f2f2f2;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+#summary-generator input[type="submit"].primary:hover {
+  filter: brightness(1.05);
+}
+
+/* Output box */
+#summary-generator #output {
+  margin-top: 12px;
+  min-height: 100px;
+  max-height: 220px;
+  overflow: auto;
+  padding: 12px;
+  background: #ffffff;
+  color: #111;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Small screens */
+@media (max-width: 420px) {
+  #summary-generator {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    width: auto;
+  }
+}
+
+/* Screen-reader only helper (keep consistent with your project if you already have one) */
+#summary-generator .sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 1px, 1px); white-space: nowrap; border: 0;
+}
+
+#ext-blur-overlay {
+  position: fixed;
+  z-index: 2147483648;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: #222;
+  font-weight: 600;
+  pointer-events: all;
+  transition: opacity 0.2s;
+}
+
+#parent-div, #email-generator, #summary-generator {
+  transition: filter 0.2s;
+}
+
+.ext-blur-wrap {
+    width: 100%;
+    height: 100%;
+}

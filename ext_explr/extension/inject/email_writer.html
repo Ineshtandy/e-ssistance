@@ -1,0 +1,27 @@
+<div id="email-generator" role="dialog" aria-label="Generate a Professional Email">
+  <button id="back-button" type='button' aria-label="Back">←</button>
+  <button id="close-button" aria-label="Close">×</button>
+  <h3>Generate a Professional Email</h3>
+
+
+  <form id="email-form" method="POST" action="about:blank">
+    <label for="email_content">Email Content (Optional):</label>
+    <textarea id="email_content" name="email_content" rows="4"></textarea>
+
+    <label for="user_query">User Query:</label>
+    <input id="user_query" type="text" name="user_query" value="write an email to thank my manager">
+
+    <label for="purpose">Purpose:</label>
+    <input id="purpose" type="text" name="purpose" value="writing">
+
+    <label for="intent">Intent:</label>
+    <input id="intent" type="text" name="intent" value="thanking">
+
+    <label for="style">Style:</label>
+    <input id="style" type="text" name="style" value="professional">
+
+    <input type="submit" value="Generate Email" class="primary">
+  </form>
+
+  <div id="output" aria-live="polite"></div>
+</div>
