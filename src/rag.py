@@ -1,4 +1,8 @@
 import weaviate
+import os
+WEAVIATE_HOST = os.getenv("WEAVIATE_HOST", "weaviate")   # service name on the Compose network
+WEAVIATE_HTTP_PORT = int(os.getenv("WEAVIATE_HTTP_PORT", "8080"))
+WEAVIATE_GRPC_PORT = int(os.getenv("WEAVIATE_GRPC_PORT", "50051"))
 from src.formats import EmailResponse
 from src.config import EMBEDDING_MODEL
 from langchain.schema import Document
@@ -11,7 +15,13 @@ class RAG:
     def __init__(self,model):
         self.writer = model.with_structured_output(EmailResponse)
         embedder = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
-        self._client = weaviate.connect_to_local()
+        # self._client = weaviate.connect_to_local() # inside docker compose API must use http://weaviate:8080 and not localhost
+        # client = weaviate.connect_to_local()
+        self._client = weaviate.connect_to_local(
+            host=WEAVIATE_HOST,          
+            port=WEAVIATE_HTTP_PORT,
+            grpc_port=WEAVIATE_GRPC_PORT,
+        )
         # for fist time creation use:
         """
         vectorstore = WeaviateVectorStore.from_documents(
@@ -54,7 +64,7 @@ class RAG:
             search_kwargs={"k": num_docs, "score_threshold": threshold}
         )
         retrieved_templates = retriever.invoke(rewritten_user_query.retrieval_query)
-        retrieved_context = "\n\n".join([f'SUBJECT: {template.metadata['subject']} {template.page_content}\n\n' for template in retrieved_templates])
+        retrieved_context = "\n\n".join([f"SUBJECT: {template.metadata['subject']} {template.page_content}\n\n" for template in retrieved_templates])
         return retrieved_context
 
     def write(self, retrieved_context,email,user_query,purpose,intent,style='professional'):

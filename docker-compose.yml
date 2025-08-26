@@ -1,13 +1,7 @@
 ---
 services:
   weaviate:
-    command:
-    - --host
-    - 0.0.0.0
-    - --port
-    - '8080'
-    - --scheme
-    - http
+    command: ["--host","0.0.0.0","--port","8080","--scheme","http"]
     image: cr.weaviate.io/semitechnologies/weaviate:1.32.0
     ports:
     - 8080:8080
@@ -20,8 +14,33 @@ services:
       AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
       PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
       ENABLE_API_BASED_MODULES: 'true'
-      ENABLE_MODULES: 'text2vec-ollama,generative-ollama'
       CLUSTER_HOSTNAME: 'node1'
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/v1/.well-known/ready"]
+      interval: 2s
+      timeout: 1s
+      retries: 60  
+
+  api:
+    build:
+      context: .
+      dockerfile: ./ext_explr/Dockerfile
+    environment:
+      # IMPORTANT: inside Compose, refer to the service name, not localhost
+      WEAVIATE_URL: "http://weaviate:8080"
+      FLASK_ENV: "development"
+      GMAIL_CREDENTIALS_PATH: "/gmail_auth/credentials.json"
+      GMAIL_TOKEN_PATH: "/gmail_auth/token.json"
+    volumes:
+      - ./src/gmail_auth:/gmail_auth
+    ports:
+      - "5050:5000"
+    depends_on:
+      weaviate:
+        condition: service_healthy
+    env_file:
+      - ./.env
+
 volumes:
   weaviate_data:
     external: true

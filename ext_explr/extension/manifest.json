@@ -12,7 +12,11 @@
     {
       "resources": [
         "inject/index.html",
-        "inject/style.css"
+        "inject/style.css",
+        "inject/email_writer.html",
+        "inject/email_writer.css",
+        "inject/summary_generator.html",
+        "inject/summary_generator.css"
       ],
       "matches":["<all_urls>"]
     }

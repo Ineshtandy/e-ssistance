@@ -1,46 +1,14 @@
-<!-- <h3>Generate a Professional Email</h3>
-<button id="close-button">X</button>
-<form method="POST" id="email-form">
-    <label>Email Content (Optional):</label><br>
-    <input type="text" name="email_content" value=""><br><br>
-
-    <label>User Query:</label><br>
-    <input type="text" name="user_query" value="write an email to thank my manager"><br><br>
-
-    <label>Purpose:</label><br>
-    <input type="text" name="purpose" value="writing"><br><br>
-
-    <label>Intent:</label><br>
-    <input type="text" name="intent" value="thanking"><br><br>
-
-    <label>Style:</label><br>
-    <input type="text" name="style" value="professional"><br><br>
-
-    <input type="submit" value="Generate Email">
-</form>
-<div id="output"></div> -->
-<div id="email-generator" role="dialog" aria-label="Generate a Professional Email">
-  <h3>Generate a Professional Email</h3>
+<div id="index-page" role="dialog" aria-label="Extension Panel">
+  <h3>Hey! I'm your E-ssitant</h3>
+  <h3 id="index-title">How Can I Help?</h3>
   <button id="close-button" aria-label="Close">×</button>
 
-  <form method="POST" id="email-form">
-    <label for="email_content">Email Content (Optional):</label>
-    <textarea id="email_content" name="email_content" rows="4"></textarea>
+  <!-- View Switcher (no logic here) -->
+  <nav class="index-nav" aria-label="View switcher">
+    <button class="index-tab" data-view="email_gen">Email Generator</button>
+    <button class="index-tab" data-view="summary">Summary Generator</button>
+  </nav>
 
-    <label for="user_query">User Query:</label>
-    <input id="user_query" type="text" name="user_query" value="write an email to thank my manager">
-
-    <label for="purpose">Purpose:</label>
-    <input id="purpose" type="text" name="purpose" value="writing">
-
-    <label for="intent">Intent:</label>
-    <input id="intent" type="text" name="intent" value="thanking">
-
-    <label for="style">Style:</label>
-    <input id="style" type="text" name="style" value="professional">
-
-    <input type="submit" value="Generate Email" class="primary">
-  </form>
-
-  <div id="output" aria-live="polite"></div>
+  <!-- JS will render view content here -->
+  <section id="index-body" class="index-viewhost"></section>
 </div>

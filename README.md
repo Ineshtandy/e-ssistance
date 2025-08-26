@@ -1,1 +1,69 @@
 # e-ssistance
+
+## Project Overview
+
+**e-ssistance** is a productivity tool designed to simplify two common everyday tasks: writing/replying to emails and checking emails, all integrated into a user-friendly web extension. The project was developed to address personal recurring challenges in email management, aiming to save time and enhance efficiency.
+
+### Key Features
+
+1. **AI-Powered Email Generation**
+	- Compose or reply to emails with the desired tone, intent, and style.
+	- Utilizes a backend server built with Flask, leveraging LangChain and Retrieval-Augmented Generation (RAG) for user-context-aware responses.
+	- Seamlessly integrates with the browser via a web extension for quick access.
+
+2. **Efficient Email Retrieval**
+	- Instantly fetch emails from your Gmail account for any desired date range without visiting the email website.
+	- Saves time by providing direct access to your inbox through the extension interface.
+
+## Architecture
+
+- **Web Extension**: Provides the user interface for both email generation and retrieval.
+- **Backend Server**: Flask-based API that handles email generation using AI and processes email retrieval requests.
+- **LangChain with RAG**: Enhances email generation by building user context for more relevant and personalized responses.
+- **Gmail API**: For personal email access and retrieval
+
+## Setup Instructions
+
+### 1. Email Generation (AI Email Writer)
+
+1. **Clone the repository:**
+	```bash
+	git clone https://github.com/Ineshtandy/e-ssistance.git
+	cd e-ssistance
+	```
+2. **Create a `.env` file:**
+	- Add your Gemini API key in the `.env` file as follows:
+	  ```env
+	  GEMINI_API_KEY=your_gemini_api_key_here
+	  ```
+
+### 2. Email Access (Gmail Integration)
+
+1. **Obtain Google OAuth Credentials:**
+	- Register a project in the [Google Cloud Console](https://console.cloud.google.com/).
+	- Enable the Gmail API and create OAuth 2.0 credentials.
+	- Download the `credentials.json` file.
+2. **Generate `token.json`:**
+	- Run the provided sample script (see `src/email_retriever.py` or relevant script) to authenticate and generate `token.json`.
+3. **Place Credentials:**
+	- Move both `credentials.json` and `token.json` into the `src/gmail_auth/` directory.
+
+## Usage
+
+1. **Start the Backend Server:**
+	- Use Docker Compose or run the Flask app directly to start the backend server.
+2. **Install the Web Extension:**
+	- Load the extension from the `ext_explr/extension/` directory in your browser's extension settings (Developer Mode).
+3. **Interact via the Extension:**
+	- Use the extension popup to generate emails or retrieve emails for a specific date range.
+
+## Technologies Used
+
+- Python (Flask, LangChain)
+- Gemini API
+- JavaScript, HTML, CSS (Web Extension)
+- Docker
+
+## License
+
+This project is for personal use and learning purposes.

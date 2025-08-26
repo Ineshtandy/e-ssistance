@@ -1,5 +1,5 @@
 /* Scope everything to the overlay container to avoid site CSS collisions */
-#index-page {
+#email-generator {
   position: fixed;
   top: 12px;
   right: 12px;
@@ -18,17 +18,20 @@
 }
 
 /* Heading centered at the top */
-#index-page h3 {
+#email-generator h3 {
   margin: 0;
   text-align: center;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.2px;
   color: #111;
+
+  position: relative;
+  z-index: 1;
 }
 
 /* Close button: “X” in the top-right corner of the box */
-#index-page #close-button {
+#email-generator #close-button {
   position: absolute;
   top: 6px;
   right: 8px;
@@ -40,15 +43,39 @@
   color: #111;
   padding: 6px;
   border-radius: 8px;
+
+  z-index: 2;
 }
-#index-page #close-button:hover,
-#index-page #close-button:focus {
+#email-generator #close-button:hover,
+#email-generator #close-button:focus {
   background: rgba(0,0,0,0.06);
   outline: none;
 }
 
+#email-generator #back-button {
+  position: absolute;
+  top: 6px;
+  left: 8px; 
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  color: #111;
+  padding: 6px;
+  border-radius: 8px;
+
+  z-index: 2;
+}
+#email-generator #back-button:hover,
+#email-generator #back-button:focus {
+  background: rgba(0,0,0,0.06);
+  outline: none; 
+}
+
+
 /* Form layout */
-#index-page form {
+#email-generator form {
   margin-top: 12px;
   display: grid;
   grid-template-columns: 1fr;
@@ -56,14 +83,14 @@
 }
 
 /* Labels & inputs */
-#index-page label {
+#email-generator label {
   font-size: 12px;
   color: #111;
   margin-bottom: 4px;
 }
 
-#index-page input[type="text"],
-#index-page textarea {
+#email-generator input[type="text"],
+#email-generator textarea {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid #cfcfcf;
@@ -74,19 +101,19 @@
   box-sizing: border-box;
 }
 
-#index-page input[type="text"]::placeholder,
-#index-page textarea::placeholder {
+#email-generator input[type="text"]::placeholder,
+#email-generator textarea::placeholder {
   color: #666;
 }
 
-#index-page input[type="text"]:focus,
-#index-page textarea:focus {
+#email-generator input[type="text"]:focus,
+#email-generator textarea:focus {
   border-color: #7a7a7a;
   box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
 }
 
 /* Submit button */
-#index-page input[type="submit"].primary {
+#email-generator input[type="submit"].primary {
   margin-top: 4px;
   padding: 10px 12px;
   border: 1px solid #111;
@@ -96,12 +123,12 @@
   cursor: pointer;
   font-weight: 600;
 }
-#index-page input[type="submit"].primary:hover {
+#email-generator input[type="submit"].primary:hover {
   filter: brightness(1.05);
 }
 
 /* Output box at the bottom */
-#index-page #output {
+#email-generator #output {
   margin-top: 12px;
   min-height: 100px;
   max-height: 220px;
@@ -117,7 +144,7 @@
 
 /* Make sure it stays usable on very small screens */
 @media (max-width: 420px) {
-  #index-page {
+  #email-generator {
     top: 8px;
     left: 8px;
     right: 8px;
@@ -125,29 +152,26 @@
   }
 }
 
-/* --- View Switcher (tabs) --- */
-#index-page .index-nav {
-  display: grid;
-  grid-auto-flow: column;
-  gap: 8px;
-  margin-top: 12px;
-}
-#index-page .index-tab {
-  padding: 8px 10px;
-  border: 1px solid #cfcfcf;
-  background: #fff;
-  color: #111;
-  border-radius: 10px;
-  cursor: pointer;
+#ext-blur-overlay {
+  position: fixed;
+  z-index: 2147483648;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: #222;
   font-weight: 600;
-}
-#index-page .index-tab.is-active {
-  border-color: #111;
-  background: #111;
-  color: #f2f2f2;
+  pointer-events: all;
+  transition: opacity 0.2s;
 }
 
-/* Host where views are injected */
-#index-page .index-viewhost {
-  margin-top: 12px;
+#parent-div, #email-generator, #summary-generator {
+  transition: filter 0.2s;
+}
+
+.ext-blur-wrap {
+    width: 100%;
+    height: 100%;
 }

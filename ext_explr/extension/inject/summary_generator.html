@@ -1,0 +1,33 @@
+<div id="summary-generator" role="dialog" aria-label="Generate Email Summary">
+  <button id="back-button" type='button' aria-label="Back">←</button>
+  <h3>Email Summary</h3>
+  <button id="close-button" aria-label="Close">×</button>
+
+  <form id="summary-form" method="POST" action="about:blank">
+    <fieldset class="range-mode">
+      <legend class="sr-only">Select time range</legend>
+
+      <label class="radio">
+        <input type="radio" name="range_mode" value="last24" checked>
+        Past 24 hours
+      </label>
+
+      <label class="radio">
+        <input type="radio" name="range_mode" value="custom">
+        Custom range
+      </label>
+    </fieldset>
+
+    <div class="date-range" aria-hidden="true">
+      <label for="start_date">Start date</label>
+      <input id="start_date" type="date" name="start_date" disabled>
+
+      <label for="end_date">End date</label>
+      <input id="end_date" type="date" name="end_date" disabled>
+    </div>
+
+    <input type="submit" value="Generate Summary" class="primary">
+  </form>
+
+  <div id="output" aria-live="polite"></div>
+</div>
