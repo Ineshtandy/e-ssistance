@@ -29,6 +29,10 @@ services:
       # IMPORTANT: inside Compose, refer to the service name, not localhost
       WEAVIATE_URL: "http://weaviate:8080"
       FLASK_ENV: "development"
+      GMAIL_CREDENTIALS_PATH: "/gmail_auth/credentials.json"
+      GMAIL_TOKEN_PATH: "/gmail_auth/token.json"
+    volumes:
+      - ./src/gmail_auth:/gmail_auth
     ports:
       - "5050:5000"
     depends_on:

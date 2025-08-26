@@ -3,6 +3,7 @@ import os
 from src.rewriter import Rewriter
 from src.rag import RAG
 from src.config import GEMINI_MODEL
+from src.email_retriever import get_email_info
 
 # function formation makes main.py callable from app.py
 def generate_email(email_content,user_query,purpose,intent,style):
@@ -36,7 +37,10 @@ def generate_email(email_content,user_query,purpose,intent,style):
 
     # Step 3: Generate the final email using RAG
     final_output = rag.write(retrieved_context, email_content, user_query, purpose, intent, style)
-    # print("Subject:", final_output.subject)
-    # print("Body:", final_output.body)
 
     return final_output.subject, final_output.body
+
+def generate_summary(cur_day = True, start_date = "", end_date = ""):
+
+    # TODO: incorporate body decoding and llm wrapper
+    return get_email_info(cur_day=cur_day,start_date=start_date, end_date=end_date)

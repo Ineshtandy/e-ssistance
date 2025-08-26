@@ -145,19 +145,9 @@ async function submissionDelegator(e) {
             });
         }
         catch (err) {
-            setTimeout(() => {
-                document.getElementById("output").innerText = "Error contacting server";
-                hideBlurOverlay();  
-            }, 2000);
+            document.getElementById("output").innerText = "Error contacting server";
             return;
         }
-
-        
-        // if (!res.ok) {
-        //     document.getElementById("output").innerText = "Error contacting server";
-        //     hideBlurOverlay();
-        //     return;
-        // }
 
         hideBlurOverlay();
 
@@ -169,6 +159,7 @@ async function submissionDelegator(e) {
 
         return;
     }
+
     const summaryForm = e.target.closest('#summary-form');
     if (summaryForm) {
         e.preventDefault();
@@ -177,15 +168,19 @@ async function submissionDelegator(e) {
         const panel = summaryForm.closest('#summary-generator');
         const mode  = panel.querySelector('input[name="range_mode"]:checked')?.value;
 
-        const startInput = panel.querySelector('#start_date');
-        const endInput   = panel.querySelector('#end_date');
-        const today = new Date().toISOString().split('T')[0];
-
-        let payload;
+        let cur_day;
+        let start_date;
+        let end_date;
 
         if (mode === 'custom') {
+            const startInput = panel.querySelector('#start_date');
+            const endInput   = panel.querySelector('#end_date');
+            const today = new Date().toISOString().split('T')[0];
+
             const start = startInput.value;
             const end   = endInput.value;
+
+            console.log('inside custom',start,end);
 
             // Basic validations
             if (!start || !end) {
@@ -204,19 +199,46 @@ async function submissionDelegator(e) {
             alert('End date cannot be before start date.');
             return;
             }
-            payload = { mode: 'custom', start_date: start, end_date: end };
+            cur_day = false;
+            start_date = start;
+            end_date = end;
         } else {
-            payload = { mode: 'last24' };
+            cur_day = true;
+        }
+
+        let res;
+        try {
+                res = await fetch(`${BACKEND_URL}/emsummary`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ cur_day, start_date, end_date })
+                });
+        }
+        catch (err) {
+            hideBlurOverlay();
+            document.getElementById("output").innerText = "Error contacting server";
+            return;
         }
 
         hideBlurOverlay();
 
-        // TODO: POST to backend, then render summary
-        const output = panel.querySelector('#output');
-        output.textContent = `Generating summary for: ${JSON.stringify(payload)}`;
-        // const res = await fetch(...)
+        let data = null;
+        try { data = await res.json(); } catch { /* leave data = null */ }
 
+        if (!res.ok || !data || typeof data.summary !== 'string') {
+        const msg = (data && data.error) ? data.error : `HTTP ${res.status}`;
+        document.getElementById("output").innerHTML = `
+            <p><strong>Requested Summary:</strong></p><br>
+            <p>⚠️ ${msg}</p>
+        `;
+        console.log('Server error payload:', data);
         return;
+        }
+
+        document.getElementById("output").innerHTML = `
+        <p><strong>Requested Summary:</strong></p><br>
+        <p>${data.summary}</p>
+        `;
     }
 }
 
