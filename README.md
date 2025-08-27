@@ -44,6 +44,8 @@
 	  ```env
 	  GEMINI_API_KEY=your_gemini_api_key_here
 	  ```
+3. **Open chrome://extensions/**
+    - Enable developer mode and click ```load unpacked``` to upload ```ext_explr/extension``` folder
 
 ### 2. Email Access (Gmail Integration)
 
@@ -63,7 +65,7 @@
 2. **Install the Web Extension:**
 	- Load the extension from the `ext_explr/extension/` directory in your browser's extension settings (Developer Mode).
 3. **Interact via the Extension:**
-	- Use the extension popup to generate emails or retrieve emails for a specific date range.
+	- Use the extension to generate emails or retrieve emails for a specific date range.
 
 ## Technologies Used
 
