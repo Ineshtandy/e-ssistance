@@ -4,7 +4,6 @@ langchain-community
 sentence-transformers
 langchain-huggingface
 langchain_weaviate
-numpy
 pydantic
 dotenv
 langchain_google_genai
@@ -12,3 +11,7 @@ pathlib
 google-api-python-client
 google-auth-httplib2
 google-auth-oauthlib
+raganything
+mineru
+pillow
+pymupdf

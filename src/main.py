@@ -1,9 +1,12 @@
+from ast import parse
 from langchain_google_genai import ChatGoogleGenerativeAI
 import os
+from src.app_content_writer import AppHelper
 from src.rewriter import Rewriter
 from src.rag import RAG
 from src.config import GEMINI_MODEL
 from src.email_retriever import get_email_info
+from src.doc_parser import call_parser
 
 # function formation makes main.py callable from app.py
 def generate_email(email_content,user_query,purpose,intent,style):
@@ -44,3 +47,36 @@ def generate_summary(cur_day = True, start_date = "", end_date = ""):
 
     # TODO: incorporate body decoding and llm wrapper
     return get_email_info(cur_day=cur_day,start_date=start_date, end_date=end_date)
+
+def get_resume_content(flag:bool):
+
+    resume_content = None
+    if flag:
+        # it is a new file call doc_parser
+        resume_content = call_parser()
+    else:
+        # use old file
+        # get cur_resume.md from parsed_output
+        with open("/app/parsed_output/cur_resume/ocr/cur_resume.md", "r") as parsed_resume:
+            resume_content = parsed_resume.strip()
+
+    # send resume_content to application_help_generator.py (call to gemini)
+    # receive ans, return ans to app.py to print
+
+    return resume_content
+
+def generate_app_content(resume_content,context_info,user_query):
+    llm = ChatGoogleGenerativeAI(
+        model=GEMINI_MODEL,
+        google_api_key=os.environ["GOOGLE_API_KEY"],
+        temperature=0,
+        max_tokens=None,
+        timeout=None,
+        max_retries=2,
+    )
+
+    content_writer = AppHelper(llm)
+
+    written_content = content_writer.write(resume_content,context_info,user_query)
+
+    return written_content.body

@@ -16,7 +16,9 @@
         "inject/email_writer.html",
         "inject/email_writer.css",
         "inject/summary_generator.html",
-        "inject/summary_generator.css"
+        "inject/summary_generator.css",
+        "inject/application_helper.html",
+        "inject/application_helper.css"
       ],
       "matches":["<all_urls>"]
     }

@@ -33,6 +33,9 @@ services:
       GMAIL_TOKEN_PATH: "/gmail_auth/token.json"
     volumes:
       - ./src/gmail_auth:/gmail_auth
+      - ./uploads:/app/doc_uploads
+      - ./parsed_output:/app/parsed_output
+      - ./rag_storage:/app/rag_storage
     ports:
       - "5050:5000"
     depends_on:
