@@ -4,23 +4,29 @@
 
 **e-ssistance** is a productivity tool designed to simplify two common everyday tasks: writing/replying to emails and checking emails, all integrated into a user-friendly web extension. The project was developed to address personal recurring challenges in email management, aiming to save time and enhance efficiency.
 
-
+** NEW FEATURE ADDED: Get personalized e-ssistance when applying for jobs!
 
 ### Key Features
 
-1. **AI-Powered Email Generation**
+1. **Personalized Application Helper** 📝✨  
+	- Upload your **resume (PDF or image format)** and pair it with a job description or company information.  
+	- Ask any **application-related query** (e.g., “Draft a cover letter for this role” or “How can I highlight my skills for this position?”).  
+	- The system links your user profile with the provided context and generates precise, tailored responses.  
+	- Saves significant time and effort in preparing application materials by ensuring alignment between your background and the opportunity.  
+
+2. **AI-Powered Email Generation**
 	- Compose or reply to emails with the desired tone, intent, and style.
 	- Utilizes a backend server built with Flask, leveraging LangChain and Retrieval-Augmented Generation (RAG) for user-context-aware responses.
 	- Seamlessly integrates with the browser via a web extension for quick access.
 
-2. **Efficient Email Retrieval**
+3. **Efficient Email Retrieval**
 	- Instantly fetch emails from your Gmail account for any desired date range without visiting the email website.
 	- Saves time by providing direct access to your inbox through the extension interface.
 
 ## Product View
 
-| **Welcome Index** | **Email Generator** | **Email Summarizer** |
-|-------------------|---------------------|-----------------------|
+| **Welcome Index** | **Email Generator** | **Email Summarizer** | **Application Helper** |
+|-------------------|---------------------|-----------------------| -------------------------|
 <img width="291" height="166" alt="Screenshot 2025-08-26 at 1 51 00 AM" src="https://github.com/user-attachments/assets/59f73927-9198-4fda-a55b-609a13f68e6a" /> | <img width="283" height="706" alt="Screenshot 2025-08-26 at 1 51 25 AM" src="https://github.com/user-attachments/assets/b585f923-4ed4-40f7-993f-29b783773867" /> | <img width="280" height="470" alt="Screenshot 2025-08-26 at 1 51 36 AM" src="https://github.com/user-attachments/assets/abcea5a2-5282-49c7-afa8-cf9ea947733f" />
 
 ## Architecture

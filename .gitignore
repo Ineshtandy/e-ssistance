@@ -9,3 +9,4 @@ uploads/
 parsed_output/
 notebooks/
 rag_storage/
+.DS_Store
