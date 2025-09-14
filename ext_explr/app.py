@@ -2,13 +2,22 @@ from flask import Flask, request, render_template, jsonify
 from flask_cors import CORS
 import sys
 import os, os.path, json
-from src.main import generate_email
+from src.main import generate_app_content, generate_email
 from src.main import generate_summary
+from src.main import get_resume_content
+from src.main import generate_app_content
 
 # Add src to path so you can import from it
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
 app = Flask(__name__)
+
+app.config['UPLOAD_FOLDER'] = '/app/doc_uploads'
+app.config['STORED_RESUME'] = 'cur_resume.pdf'
+
+# creating folder to save resume
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
 CORS(app)
 
 @app.get("/health")
@@ -68,7 +77,40 @@ def email_summary():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
+@app.route('/apphelper', methods=['POST'])
+def application_helper():
+    # uploaded_file = None
+    uploaded_file = request.files.get('resume_input')
+    context_info = request.files.get('context_info')
+    user_query = request.files.get('user_query')
 
+    # File path where the uploaded file is stored
+    storage_path = os.path.join(app.config['UPLOAD_FOLDER'], app.config['STORED_RESUME'])
+    # TO DO: THIS ONLY CATERS TO PDF SAVING, IMPLEMENT PNG/JPG SAVING AS WELL BC PARSER SUPPORTS BOTH
+
+    resume_content = None
+    try:
+        if uploaded_file:
+            # Save the new resume, overwriting the old one
+            uploaded_file.save(storage_path)
+            
+            # send flag true
+            resume_content = get_resume_content(True)
+
+            # return jsonify({'op':resume_content}) # tester code
+        elif uploaded_file is None and os.path.exists(storage_path):
+            # send flag false
+            resume_content = get_resume_content(False)
+            # return jsonify({'op':f"No file input, using previous file \n\n {resume_content}"}) # tester code
+        else:
+            return jsonify({'op':f'No file present, please upload new.'})
+
+        body = generate_app_content(resume_content,context_info,user_query)
+        print('app helper content:',body)
+        return jsonify({ "body": body })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+  
 # # testing for gmail creds path inside docker
 # @app.get("/_diag/gmail")
 # def gmail_diag():

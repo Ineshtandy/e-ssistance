@@ -88,11 +88,15 @@ async function clickDelegator(e) {
     if (tab && tab.dataset.view === 'summary') {
         swapView(e.currentTarget, 'inject/summary_generator.html', 'inject/summary_generator.css', 'summary-style');
     }
+    if (tab && tab.dataset.view === 'application_helper') {
+        swapView(e.currentTarget, 'inject/application_helper.html', 'inject/application_helper.css', 'application-helper-style');
+    }
 
     return;
 }
 
 function radioDelegator(e) {
+    // summary generator logic
     const sum_gen_root = e.target.closest('#summary-generator')
 
     if (sum_gen_root && e.target.name === 'range_mode') {
@@ -119,7 +123,18 @@ function radioDelegator(e) {
 
       dateWrap.setAttribute('aria-hidden', String(!custom));
     }
-    return;
+
+    // application helper logic
+    // const app_helper_root = e.target.closest('#application-helper')
+
+    // if (app_helper_root && e.target.name === 'resume_input') {
+    //     const resume = app_helper_root.querySelector('#resume');
+    //     if (resume) {
+    //         resume_file = resume.files[0];
+    //         console.log(resume_file.name);
+    //     }
+    // }
+    // return;
 }
 
 async function submissionDelegator(e) {
@@ -240,6 +255,35 @@ async function submissionDelegator(e) {
         <p>${data.summary}</p>
         `;
     }
+
+    const applicationForm = e.target.closest('#application-form');
+    if (applicationForm) {
+        e.preventDefault();
+        showBlurOverlay();
+
+        let app_form_element = document.querySelector('#application-form');
+        app_form_data = new FormData(app_form_element);
+
+        let res;
+        try {
+                res = await fetch(`${BACKEND_URL}/apphelper`, {
+                method: "POST",
+                body: app_form_data
+            });
+        }
+        catch (err) {
+            hideBlurOverlay();
+            document.getElementById("output").innerText = "Error contacting server";
+            return;
+        }
+
+        hideBlurOverlay();
+
+        const data = await res.json();
+        document.getElementById("output").innerHTML = `
+            <p><strong>Answer:</strong><br>${data.body}</p>
+        `;
+    }
 }
 
 // function showBlurOverlay(message = "Fetching details...") {
@@ -287,7 +331,7 @@ async function submissionDelegator(e) {
 // }
 
 function showBlurOverlay(message = "Fetching details...") {
-    const panel = document.querySelector('#email-generator, #summary-generator');
+    const panel = document.querySelector('#email-generator, #summary-generator, #application-helper');
     if (panel) {
         // Wrap panel content if not already wrapped
         let blurWrap = panel.querySelector('.ext-blur-wrap');
@@ -332,7 +376,7 @@ function showBlurOverlay(message = "Fetching details...") {
 }
 
 function hideBlurOverlay() {
-    const panel = document.querySelector('#email-generator, #summary-generator');
+    const panel = document.querySelector('#email-generator, #summary-generator, #application-helper');
     if (panel) {
         const blurWrap = panel.querySelector('.ext-blur-wrap');
         if (blurWrap) blurWrap.style.filter = '';

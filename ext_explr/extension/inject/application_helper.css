@@ -1,0 +1,173 @@
+/* Scope everything to the overlay container to avoid site CSS collisions */
+#application-helper {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 2147483647; /* above almost everything */
+  width: 360px;
+  max-width: 92vw;
+
+  background: #f2f2f2;          /* light gray */
+  color: #111;                   /* black/dark text for contrast */
+  font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Arial, sans-serif;
+  border: 1px solid #d9d9d9;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+  padding: 16px 16px 14px;
+  box-sizing: border-box;
+}
+
+/* Heading centered at the top */
+#application-helper h3 {
+  margin: 0;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: #111;
+
+  position: relative;
+  z-index: 1;
+}
+
+/* Close button: "X" in the top-right corner of the box */
+#application-helper #close-button {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  color: #111;
+  padding: 6px;
+  border-radius: 8px;
+
+  z-index: 2;
+}
+#application-helper #close-button:hover,
+#application-helper #close-button:focus {
+  background: rgba(0,0,0,0.06);
+  outline: none;
+}
+
+#application-helper #back-button {
+  position: absolute;
+  top: 6px;
+  left: 8px; 
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  color: #111;
+  padding: 6px;
+  border-radius: 8px;
+
+  z-index: 2;
+}
+#application-helper #back-button:hover,
+#application-helper #back-button:focus {
+  background: rgba(0,0,0,0.06);
+  outline: none; 
+}
+
+/* Form layout */
+#application-helper form {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+/* Labels & inputs */
+#application-helper label {
+  font-size: 12px;
+  color: #111;
+  margin-bottom: 4px;
+}
+
+#application-helper input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  background: #fff;
+  color: #111;
+  outline: none;
+  box-sizing: border-box;
+}
+
+#application-helper input[type="text"]::placeholder {
+  color: #666;
+}
+
+#application-helper input[type="text"]:focus {
+  border-color: #7a7a7a;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
+}
+
+/* Submit button */
+#application-helper input[type="submit"].primary {
+  margin-top: 4px;
+  padding: 10px 12px;
+  border: 1px solid #111;
+  background: #111;     /* black button */
+  color: #f2f2f2;       /* contrasts with light gray bg */
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+#application-helper input[type="submit"].primary:hover {
+  filter: brightness(1.05);
+}
+
+/* Output box at the bottom */
+#application-helper #output {
+  margin-top: 12px;
+  min-height: 100px;
+  max-height: 220px;
+  overflow: auto;
+  padding: 12px;
+  background: #ffffff;
+  color: #111;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  white-space: pre-wrap;   /* preserve line breaks */
+  word-wrap: break-word;
+}
+
+/* Make sure it stays usable on very small screens */
+@media (max-width: 420px) {
+  #application-helper {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    width: auto;
+  }
+}
+
+#ext-blur-overlay {
+  position: fixed;
+  z-index: 2147483648;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: #222;
+  font-weight: 600;
+  pointer-events: all;
+  transition: opacity 0.2s;
+}
+
+#parent-div, #email-generator, #summary-generator, #application-helper {
+  transition: filter 0.2s;
+}
+
+.ext-blur-wrap {
+    width: 100%;
+    height: 100%;
+}

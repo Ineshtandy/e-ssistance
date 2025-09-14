@@ -12,3 +12,8 @@ class ResponseFormatter(BaseModel):
 class EmailResponse(BaseModel):
     subject: str = Field(description="Subject line of the email")
     body: str = Field(description="Body of the email in plain text")
+
+class ApplicationContentResponse(BaseModel):
+    body: str = Field(
+        description = "Answer to the query with appropriate keywords matching the profile with the context information, displaying perfect alignment of the profile with context information."
+    )

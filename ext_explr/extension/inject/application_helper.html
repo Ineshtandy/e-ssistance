@@ -1,0 +1,20 @@
+<div id="application-helper" role="dialog" aria-label="Application Helper">
+  <button id="back-button" type='button' aria-label="Back">←</button>
+  <h3>Application Helper</h3>
+  <button id="close-button" aria-label="Close">×</button>
+
+  <form id="application-form" method="POST" action="about:blank">
+    <label for="resume">Upload Resume:</label>
+    <input id="resume" type="file" name="resume_input" accept=".pdf">
+
+    <label for="company_name">Job Description or Relevant Company Information:</label>
+    <input id="company_name" type="text" name="context_info" placeholder="">
+
+    <label for="application_type">Query:</label>
+    <input id="application_type" type="text" name="user_query" placeholder="What can I help you with?">
+
+    <input type="submit" value="Generate Answers" class="primary">
+  </form>
+
+  <div id="output" aria-live="polite"></div>
+</div>

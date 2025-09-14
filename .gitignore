@@ -5,3 +5,7 @@ credentials.json
 token.json
 /gmail_auth
 gmail_auth/
+uploads/
+parsed_output/
+notebooks/
+rag_storage/
