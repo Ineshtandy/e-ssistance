@@ -4,13 +4,13 @@
 
 **e-ssistance** is a productivity tool designed to simplify two common everyday tasks: writing/replying to emails and checking emails, all integrated into a user-friendly web extension. The project was developed to address personal recurring challenges in email management, aiming to save time and enhance efficiency.
 
-** NEW FEATURE ADDED: Get personalized e-ssistance when applying for jobs!
+**NEW FEATURE ADDED:** Now get personalized **e-ssistance** when applying for jobs!
 
 ### Key Features
 
 1. **Personalized Application Helper** 📝✨  
 	- Upload your **resume (PDF or image format)** and pair it with a job description or company information.  
-	- Ask any **application-related query** (e.g., “Draft a cover letter for this role” or “How can I highlight my skills for this position?”).  
+	- Ask any **application-related query** (e.g., “Draft a cover letter for this role” or “How can I highlight my skills for this position?” or "What makes you a good fit for this role?").  
 	- The system links your user profile with the provided context and generates precise, tailored responses.  
 	- Saves significant time and effort in preparing application materials by ensuring alignment between your background and the opportunity.  
 
@@ -27,7 +27,8 @@
 
 | **Welcome Index** | **Email Generator** | **Email Summarizer** | **Application Helper** |
 |-------------------|---------------------|-----------------------| -------------------------|
-<img width="291" height="166" alt="Screenshot 2025-08-26 at 1 51 00 AM" src="https://github.com/user-attachments/assets/59f73927-9198-4fda-a55b-609a13f68e6a" /> | <img width="283" height="706" alt="Screenshot 2025-08-26 at 1 51 25 AM" src="https://github.com/user-attachments/assets/b585f923-4ed4-40f7-993f-29b783773867" /> | <img width="280" height="470" alt="Screenshot 2025-08-26 at 1 51 36 AM" src="https://github.com/user-attachments/assets/abcea5a2-5282-49c7-afa8-cf9ea947733f" />
+<img width="291" height="166" alt="Screenshot 2025-08-26 at 1 51 00 AM" src="https://github.com/user-attachments/assets/59f73927-9198-4fda-a55b-609a13f68e6a" /> | <img width="283" height="706" alt="Screenshot 2025-08-26 at 1 51 25 AM" src="https://github.com/user-attachments/assets/b585f923-4ed4-40f7-993f-29b783773867" /> | <img width="280" height="470" alt="Screenshot 2025-08-26 at 1 51 36 AM" src="https://github.com/user-attachments/assets/abcea5a2-5282-49c7-afa8-cf9ea947733f" /> | <img width="378" height="483" alt="Screenshot 2025-09-14 at 5 27 16 PM" src="https://github.com/user-attachments/assets/80017e36-1a18-4a79-858f-f5f4c352bc87" />
+
 
 ## Architecture
 
