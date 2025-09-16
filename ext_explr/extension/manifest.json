@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Email Generator",
+  "name": "E-ssistance",
   "version": "1.0",
   "action": {},
   "permissions": ["scripting", "activeTab"],

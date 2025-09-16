@@ -81,12 +81,11 @@ def email_summary():
 def application_helper():
     # uploaded_file = None
     uploaded_file = request.files.get('resume_input')
-    context_info = request.files.get('context_info')
-    user_query = request.files.get('user_query')
+    context_info = request.form.get('context_info')
+    user_query = request.form.get('user_query')
 
     # File path where the uploaded file is stored
     storage_path = os.path.join(app.config['UPLOAD_FOLDER'], app.config['STORED_RESUME'])
-    # TO DO: THIS ONLY CATERS TO PDF SAVING, IMPLEMENT PNG/JPG SAVING AS WELL BC PARSER SUPPORTS BOTH
 
     resume_content = None
     try:
@@ -103,13 +102,14 @@ def application_helper():
             resume_content = get_resume_content(False)
             # return jsonify({'op':f"No file input, using previous file \n\n {resume_content}"}) # tester code
         else:
-            return jsonify({'op':f'No file present, please upload new.'})
+            return jsonify({'body':f'No file present, please upload new.'})
 
+        print('test-coming here?')
         body = generate_app_content(resume_content,context_info,user_query)
         print('app helper content:',body)
         return jsonify({ "body": body })
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'body': str(e)}), 500
   
 # # testing for gmail creds path inside docker
 # @app.get("/_diag/gmail")

@@ -8,12 +8,13 @@ class AppHelper:
 
         self.instruction_prompt = ChatPromptTemplate.from_messages([
             ("system", 
-            "You write concise, ATS-aware application answers that align a resume to a job/company context.\n"
+            "You write concise, ATS-aware application answers that align a resume/profile to a job/company context.\n"
             "Rules:\n"
             "1) Use only evidence in the resume/context; never invent.\n"
-            "2) Lead with the strongest, most relevant proof and quantified results.\n"
+            "2) Lead with the projects, linking the most relevant project experience with company/job context, followed by relevant matching work experience.\n"
             "3) Mirror high-signal keywords from the context when truthful.\n"
-            "4) Prefer a tight paragraph unless the question demands otherwise.\n"),
+            "4) Talk about the company/job context and how it aligns/is important with the profile.\n"
+            "5) Prefer a tight paragraph unless the question demands otherwise.\n"),
             ("system", "Resume:\n{resume}\n\nJob/Company Context:\n{context}"),
             ("human", "Application Question:\n{user_question}\n\n"
                     "Produce the best possible answer aligned to the context, without fabricating any details.")

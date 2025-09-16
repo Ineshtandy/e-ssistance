@@ -58,7 +58,7 @@ def get_resume_content(flag:bool):
         # use old file
         # get cur_resume.md from parsed_output
         with open("/app/parsed_output/cur_resume/ocr/cur_resume.md", "r") as parsed_resume:
-            resume_content = parsed_resume.strip()
+            resume_content = parsed_resume.read().strip()
 
     # send resume_content to application_help_generator.py (call to gemini)
     # receive ans, return ans to app.py to print
