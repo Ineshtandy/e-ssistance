@@ -44,6 +44,23 @@ services:
     env_file:
       - ./.env
 
+  web:
+    build:
+      context: ./copilot-integration
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+      HOST: "0.0.0.0"
+      NEXT_PUBLIC_API_BASE_URL: "http://localhost:5050"
+      INTERNAL_API_BASE_URL: "http://api:5000"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    restart: unless-stopped
+    env_file:
+     - ./.env
+
 volumes:
   weaviate_data:
     external: true

@@ -8,7 +8,7 @@ class AppHelper:
 
         self.instruction_prompt = ChatPromptTemplate.from_messages([
             ("system", 
-            "You write concise, ATS-aware application answers that align a resume/profile to a job/company context.\n"
+            "You write concise, ATS-aware answers to job application questions that align resume/profile to a job/company context and answer the user question.\n"
             "Rules:\n"
             "1) Use only evidence in the resume/context; never invent.\n"
             "2) Lead with the projects, linking the most relevant project experience with company/job context, followed by relevant matching work experience.\n"
@@ -17,7 +17,7 @@ class AppHelper:
             "5) Prefer a tight paragraph unless the question demands otherwise.\n"),
             ("system", "Resume:\n{resume}\n\nJob/Company Context:\n{context}"),
             ("human", "Application Question:\n{user_question}\n\n"
-                    "Produce the best possible answer aligned to the context, without fabricating any details.")
+                    "Produce the best possible answer to the user question aligned to the context, without fabricating any details.")
         ])
 
     def write(self,resume_content,context_info,user_query):

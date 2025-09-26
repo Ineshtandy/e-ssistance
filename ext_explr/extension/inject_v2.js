@@ -265,24 +265,78 @@ async function submissionDelegator(e) {
         app_form_data = new FormData(app_form_element);
 
         let res;
+        // try {
+            //     res = await fetch(`${BACKEND_URL}/apphelper`, {
+            //     method: "POST",
+            //     body: app_form_data
+            // });
+        // }
+        // catch (err) {
+        //     hideBlurOverlay();
+        //     document.getElementById("output").innerText = "Error contacting server";
+        //     return;
+        // }
+
         try {
-                res = await fetch(`${BACKEND_URL}/apphelper`, {
+            res = await fetch(`${BACKEND_URL}/apphelper`, {
                 method: "POST",
                 body: app_form_data
             });
-        }
-        catch (err) {
+
+            const data = await res.json();
+            const user_query = data.user_query || '';
+            const context = data.context_info || 'here lies context';
+            const profile = data.resume_content || 'here lies profile';
+
+            const chatURL =
+            `http://localhost:3000/` +
+            `?user_query=${encodeURIComponent(user_query)}` +
+            `&context=${encodeURIComponent(context)}` +
+            `&profile=${encodeURIComponent(profile)}`;
+            
+            const output = document.getElementById('output');
+
+            // Measure before changing content
+            const bbox = output.getBoundingClientRect();
+            const lockedHeight = Math.max( Math.round(bbox.height), 360 ); // fallback minimum
+
+            // Prepare the host
+            output.innerHTML = '';
+            output.style.position = 'relative';
+            output.style.height = lockedHeight + 'px';  // keep the same height as before
+            output.style.overflow = 'hidden';
+
+            // Add the iframe
+            const iframe = document.createElement('iframe');
+            iframe.src = chatURL;
+            iframe.style.position = 'absolute';
+            iframe.style.inset = '0';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.border = '0';
+            iframe.setAttribute('title', 'Chatbot');
+            output.appendChild(iframe);
+
+            // optional: hide the submit button
+            const submitBtn = document.querySelector('#application-form [type="submit"]');
+            if (submitBtn) submitBtn.style.display = 'none';
+
+
+            // applicationForm.style.display = 'none';
+
+            // (Optional) Scroll page to top so chat is fully visible
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } catch (err) {
+            console.error(err);
+            document.getElementById('output').innerText = 'Error rendering chatbot';
+        } finally {
             hideBlurOverlay();
-            document.getElementById("output").innerText = "Error contacting server";
-            return;
         }
 
-        hideBlurOverlay();
-
-        const data = await res.json();
-        document.getElementById("output").innerHTML = `
-            <p><strong>Answer:</strong><br>${data.body}</p>
-        `;
+        // const data = await res.json();
+        // document.getElementById("output").innerHTML = `
+        //     <p><strong>Answer:</strong><br>${data.body}</p>
+        // `;
     }
 }
 

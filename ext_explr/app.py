@@ -104,10 +104,12 @@ def application_helper():
         else:
             return jsonify({'body':f'No file present, please upload new.'})
 
-        print('test-coming here?')
-        body = generate_app_content(resume_content,context_info,user_query)
-        print('app helper content:',body)
-        return jsonify({ "body": body })
+        # print('test-coming here?')
+        # body = generate_app_content(resume_content,context_info,user_query)
+        # print('app helper content:',body)
+        return jsonify({ "resume_content": resume_content,
+                        "context_info": context_info,
+                         "user_query": user_query })
     except Exception as e:
         return jsonify({'body': str(e)}), 500
   
